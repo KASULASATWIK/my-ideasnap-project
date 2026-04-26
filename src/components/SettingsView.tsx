@@ -1,52 +1,55 @@
 import React from 'react';
-import { User, LogOut, FileText, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { MOCK_STARTUPS } from '../types/startup';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const SettingsView = () => {
-  const userStartups = MOCK_STARTUPS.slice(0, 2); // Mocking user's submitted startups
-
   return (
-    <div className="max-w-4xl space-y-8">
-      <div className="bg-white/5 border border-white/10 p-8 rounded-2xl">
-        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          <User className="text-cyan-400" /> Account Details
-        </h2>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <label className="text-gray-500 text-sm">Display Name</label>
-            <p className="text-white font-medium">Alex R.</p>
+    <div className="max-w-2xl mx-auto p-6 space-y-6">
+      <h1 className="text-3xl font-bold text-blue-900">Account Settings</h1>
+      
+      <Card className="border-blue-100">
+        <CardHeader>
+          <CardTitle>Profile Information</CardTitle>
+          <CardDescription>Update your personal details.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid gap-2">
+            <Label htmlFor="name">Full Name</Label>
+            <Input id="name" placeholder="John Doe" className="focus-visible:ring-black" />
           </div>
-          <div>
-            <label className="text-gray-500 text-sm">Email Address</label>
-            <p className="text-white font-medium">alex.r@ideasnap.io</p>
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email Address</Label>
+            <Input id="email" type="email" placeholder="john@example.com" className="focus-visible:ring-black" />
           </div>
-        </div>
-      </div>
+          <Button className="bg-blue-600 hover:bg-black transition-colors duration-200">Save Changes</Button>
+        </CardContent>
+      </Card>
 
-      <div className="bg-white/5 border border-white/10 p-8 rounded-2xl">
-        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          <FileText className="text-indigo-400" /> My Submitted Ideas
-        </h2>
-        <div className="space-y-4">
-          {userStartups.map((startup) => (
-            <div key={startup.id} className="flex justify-between items-center p-4 bg-black/20 rounded-lg border border-white/5">
-              <div>
-                <h4 className="font-medium">{startup.title}</h4>
-                <p className="text-xs text-gray-500">{startup.category}</p>
-              </div>
-              <span className="text-cyan-400 text-sm font-bold">{startup.votes} votes</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Card className="border-blue-100">
+        <CardHeader>
+          <CardTitle>Security</CardTitle>
+          <CardDescription>Manage your password and account access.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid gap-2">
+            <Label htmlFor="current-password">Current Password</Label>
+            <Input id="current-password" type="password" className="focus-visible:ring-black" />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="new-password">New Password</Label>
+            <Input id="new-password" type="password" className="focus-visible:ring-black" />
+          </div>
+          <Button variant="outline" className="border-blue-200 text-blue-700 hover:bg-black hover:text-white transition-colors duration-200">
+            Update Password
+          </Button>
+        </CardContent>
+      </Card>
 
-      <div className="bg-red-900/10 border border-red-900/20 p-8 rounded-2xl">
-        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2 text-red-400">
-          <Shield /> Danger Zone
-        </h2>
-        <Button variant="destructive" className="gap-2">
-          <LogOut size={16} /> Logout
+      <div className="pt-4 border-t border-gray-200">
+        <Button variant="destructive" className="w-full sm:w-auto hover:bg-black transition-colors duration-200">
+          Sign Out
         </Button>
       </div>
     </div>

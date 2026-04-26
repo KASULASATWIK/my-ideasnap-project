@@ -1,76 +1,65 @@
 import React, { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { Building2, User as UserIcon } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const AuthModal = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [accountType, setAccountType] = useState<'user' | 'company'>('user');
+  const [role, setRole] = useState<'user' | 'company'>('user');
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-500 text-white shadow-[0_0_15px_rgba(37,99,235,0.3)]">
-          {isLogin ? 'Login' : 'Sign Up'}
+        <Button className="bg-blue-600 hover:bg-black text-white shadow-lg transition-colors duration-200">
+          {isLogin ? 'Sign In' : 'Get Started'}
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-[#111] border-white/10 text-white">
+      <DialogContent className="sm:max-w-[400px] border-blue-100">
         <DialogHeader>
-          <DialogTitle className="text-2xl">
-            {isLogin ? 'Welcome Back' : 'Create Account'}
+          <DialogTitle className="text-2xl font-bold text-blue-900">
+            {isLogin ? 'Welcome Back' : `Create ${role === 'company' ? 'Company' : 'User'} Account`}
           </DialogTitle>
         </DialogHeader>
-        
-        <div className="flex p-1 bg-black/40 rounded-lg mb-4 border border-white/5">
-          <button 
-            onClick={() => setAccountType('user')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-sm transition-all ${accountType === 'user' ? 'bg-indigo-600 text-white' : 'text-gray-400'}`}
-          >
-            <UserIcon size={14} /> User
-          </button>
-          <button 
-            onClick={() => setAccountType('company')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-sm transition-all ${accountType === 'company' ? 'bg-indigo-600 text-white' : 'text-gray-400'}`}
-          >
-            <Building2 size={14} /> Company
-          </button>
+
+        <Tabs value={role} onValueChange={(v) => setRole(v as 'user' | 'company')} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsTrigger value="user" className="data-[state=active]:bg-black data-[state=active]:text-white">User</TabsTrigger>
+            <TabsTrigger value="company" className="data-[state=active]:bg-black data-[state=active]:text-white">Company</TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        <div className="grid gap-4 py-2">
+          {role === 'company' && !isLogin && (
+            <div className="grid gap-2">
+              <Label htmlFor="companyName">Company Name</Label>
+              <Input id="companyName" placeholder="Acme Corp" className="focus-visible:ring-black" />
+            </div>
+          )}
+          
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" placeholder="name@example.com" className="focus-visible:ring-black" />
+          </div>
+          
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password" className="focus-visible:ring-black" />
+          </div>
+
+          <Button className="w-full bg-blue-600 hover:bg-black text-white mt-2 transition-colors duration-200">
+            {isLogin ? 'Sign In' : 'Sign Up'}
+          </Button>
         </div>
 
-        <div className="space-y-4 py-2">
-          {!isLogin && (
-            <div className="space-y-2">
-              <Label>{accountType === 'user' ? 'Full Name' : 'Company Name'}</Label>
-              <Input className="bg-black/20 border-white/10" placeholder={accountType === 'user' ? 'John Doe' : 'Acme Corp'} />
-            </div>
-          )}
-          <div className="space-y-2">
-            <Label>Email</Label>
-            <Input className="bg-black/20 border-white/10" placeholder="name@example.com" />
-          </div>
-          <div className="space-y-2">
-            <Label>Password</Label>
-            <Input type="password" className="bg-black/20 border-white/10" placeholder="••••••••" />
-          </div>
-          {accountType === 'company' && !isLogin && (
-            <div className="space-y-2">
-              <Label>Company Website</Label>
-              <Input className="bg-black/20 border-white/10" placeholder="https://acme.com" />
-            </div>
-          )}
-          <Button className="w-full bg-blue-600 hover:bg-blue-500 mt-4">
-            {isLogin ? 'Sign In' : 'Get Started'}
-          </Button>
-          <p className="text-center text-sm text-gray-500 mt-4">
-            {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
-            <button 
-              onClick={() => setIsLogin(!isLogin)} 
-              className="text-cyan-400 hover:underline"
-            >
-              {isLogin ? 'Sign Up' : 'Login'}
-            </button>
-          </p>
+        <div className="text-center text-sm">
+          <button 
+            onClick={() => setIsLogin(!isLogin)}
+            className="text-blue-600 hover:text-black hover:underline font-medium transition-colors duration-200"
+          >
+            {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+          </button>
         </div>
       </DialogContent>
     </Dialog>

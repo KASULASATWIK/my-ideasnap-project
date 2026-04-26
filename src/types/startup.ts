@@ -2,36 +2,79 @@ export interface Startup {
   id: string;
   title: string;
   description: string;
-  category: string;
-  tags: string[];
-  votes: number;
   author: string;
+  votes: number;
+  tags: string[];
 }
-
-export interface CelebrityComment {
-  name: string;
-  avatar: string;
-  comment: string;
-}
-
-export const CELEBRITY_COMMENTS: Record<string, CelebrityComment[]> = {
-  '1': [
-    { name: 'Elon Musk', avatar: '🚀', comment: 'First principles thinking here. If the latency is low enough, this could actually work.' },
-    { name: 'Bill Gates', avatar: '💡', comment: 'Automation is key to the future of productivity. Very promising.' }
-  ],
-  '2': [
-    { name: 'Elon Musk', avatar: '🚀', comment: 'Sustainable energy is the only path forward. Scaling this is the hard part.' }
-  ],
-  '3': [
-    { name: 'Bill Gates', avatar: '💡', comment: 'This is exactly the kind of innovation we need to improve global health outcomes.' }
-  ]
-};
 
 export const MOCK_STARTUPS: Startup[] = [
-  { id: '1', title: 'NeuralFlow', description: 'AI-driven workflow automation for remote teams.', category: 'AI', tags: ['SaaS', 'Productivity'], votes: 1240, author: 'Alex R.' },
-  { id: '2', title: 'EcoGrid', description: 'Decentralized energy trading platform for residential solar.', category: 'Energy', tags: ['GreenTech', 'Blockchain'], votes: 890, author: 'Sarah K.' },
-  { id: '3', title: 'HealthSync', description: 'Real-time biometric monitoring for elderly care.', category: 'Health', tags: ['IoT', 'MedTech'], votes: 1560, author: 'Dr. Marcus' },
-  { id: '4', title: 'FinPulse', description: 'Predictive analytics for micro-investments.', category: 'Fintech', tags: ['Finance', 'AI'], votes: 720, author: 'Elena V.' },
-  { id: '5', title: 'EduVerse', description: 'Immersive VR classrooms for global education.', category: 'EdTech', tags: ['VR', 'Education'], votes: 2100, author: 'James L.' },
-  { id: '6', title: 'AquaPure', description: 'Smart water filtration systems for urban homes.', category: 'Hardware', tags: ['Sustainability', 'IoT'], votes: 450, author: 'Chloe M.' },
+  {
+    id: '1',
+    title: 'EcoFlow',
+    description: 'AI-powered energy management for smart homes.',
+    author: 'Jane Doe',
+    votes: 1240,
+    tags: ['AI', 'Energy', 'Sustainability']
+  },
+  {
+    id: '2',
+    title: 'NeuroLink Pro',
+    description: 'Advanced neural interface for productivity.',
+    author: 'John Smith',
+    votes: 890,
+    tags: ['Hardware', 'Health']
+  },
+  {
+    id: '3',
+    title: 'AquaPure',
+    description: 'Nanotech-based water filtration for remote areas.',
+    author: 'Alice Wong',
+    votes: 1560,
+    tags: ['Water', 'Tech', 'Global']
+  },
+  {
+    id: '4',
+    title: 'SkyCargo',
+    description: 'Autonomous drone logistics for urban delivery.',
+    author: 'Mark Chen',
+    votes: 720,
+    tags: ['Logistics', 'Drones', 'Urban']
+  },
+  {
+    id: '5',
+    title: 'BioPrint',
+    description: '3D printing of organic tissues for medical research.',
+    author: 'Dr. Elena Rossi',
+    votes: 2100,
+    tags: ['Biotech', 'Health', '3D Printing']
+  },
+  {
+    id: '6',
+    title: 'SolarSkin',
+    description: 'Transparent solar panels for skyscraper windows.',
+    author: 'Kevin Park',
+    votes: 940,
+    tags: ['Energy', 'Construction', 'Green']
+  },
+  {
+    id: '7',
+    title: 'MindMap AI',
+    description: 'Visualizing complex data structures in real-time.',
+    author: 'Sarah Jenkins',
+    votes: 450,
+    tags: ['AI', 'Data', 'Productivity']
+  },
+  {
+    id: '8',
+    title: 'OceanClean',
+    description: 'Autonomous robots for microplastic removal.',
+    author: 'David Miller',
+    votes: 1890,
+    tags: ['Environment', 'Robotics', 'Ocean']
+  }
 ];
+
+export const CELEBRITY_COMMENTS: Record<string, { name: string, comment: string, avatar: string }[]> = {
+  '1': [{ name: 'Elon Musk', comment: 'Interesting approach to grid efficiency.', avatar: '🚀' }],
+  '5': [{ name: 'Bill Gates', comment: 'This could revolutionize organ transplants.', avatar: '💡' }]
+};
